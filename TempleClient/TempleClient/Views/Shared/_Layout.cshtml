@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]  TempleClient</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TempleClient.styles.css" asp-append-version="true" />
+</head>
+<style>
+  body{
+  background: url(img/OM.jpg) ;
+  background-repeat: no-repeat ;
+  background-position: center ;
+  background-attachment: fixed; 
+  font-family:'Times New Roman', Times, serif;
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+   width: 70%;
+   margin: auto;
+   color:silver;
+  }
+
+}
+  .navbar-custom {
+    background-color: #fff3da;
+}
+</style>
+    
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light navbar-custom border-bottom box-shadow mb-3 ">
+                        @using Microsoft.AspNetCore.Http
+                        @inject IHttpContextAccessor HttpContextAccessor
+                        @{
+                            ViewBag.uid =   @HttpContextAccessor.HttpContext.Session.GetString("UserId");
+                            ViewBag.aid =    @HttpContextAccessor.HttpContext.Session.GetString("AdminId");
+                        }
+                        @{
+                           @if (ViewBag.aid != null)
+                                Html.RenderPartial("_AdminPartial");
+                            else if (ViewBag.uid != null)
+                                Html.RenderPartial("_UserPartial");
+                            else
+                                Html.RenderPartial("_LoginPartial");
+                        }
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer border-top text-muted">
+        <div class="container">
+            Created by S K Hari Kheshav -Associate Software Engineer (EITSI)
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    </font>
+</body>
+</html>

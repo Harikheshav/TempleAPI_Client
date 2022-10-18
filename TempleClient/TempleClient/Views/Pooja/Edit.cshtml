@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewBag.aid =    @HttpContextAccessor.HttpContext.Session.GetString("AdminId");
+}
+@model TempleClient.Models.Pooja
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@if (ViewBag.aid != null)
+{
+<h1>Edit</h1>
+
+<h4>Pooja</h4>
+<hr />
+<div class="w-100">
+     <span class="text-danger field-validation-error">@Html.ValidationMessage("Error")</span>
+    <div>
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Pid" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Details" class="control-label"></label>
+                <input asp-for="Details" class="form-control" />
+                <span asp-validation-for="Details" class="text-danger"></span>
+            </div>
+            <div class="form-group py-4">
+                <input type="submit" value="Save" class="btn btn-outline-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-end">
+    <a class="w-10 btn btn-primary"  asp-action="Details">Back</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+}
+else
+{
+
+<b>Either you are logged in as a User or you are logged out...</b>
+
+}

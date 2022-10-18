@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewBag.aid =    @HttpContextAccessor.HttpContext.Session.GetString("AdminId");
+    
+}
+@model TempleClient.Models.PoojaBkng
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@if (ViewBag.aid != null)
+{
+<h4>Pooja Slot Assigner</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Pooid" class="control-label">Pooja Type</label>
+                <select asp-for="Pooid" class ="form-control" asp-items="ViewBag.Pooid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Det" class="control-label">Pooja Details(if any)</label>
+                <input asp-for="Det" class="form-control" />
+                <span asp-validation-for="Det" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sdt" class="control-label">Start Date and Time</label>
+                <input asp-for="Sdt" class="form-control" />
+                <span asp-validation-for="Sdt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Edt" class="control-label">End Date and Time</label>
+                <input asp-for="Edt" class="form-control" />
+                <span asp-validation-for="Edt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-outline-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+}
+else
+{
+
+<b>Either you are logged in as a User or you are logged out...</b>
+}

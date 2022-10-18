@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+ViewBag.uid =   @HttpContextAccessor.HttpContext.Session.GetString("UserId");
+
+}
+@{
+   
+}
+@if (ViewBag.uid != null)
+{
+    <center><h4>Bank Challan</h4></center>
+    <hr />
+    <table class="table table-bordered">
+        <tr>
+        <th>
+            Booking Type
+        </th>
+        <td>
+            @TempData["Booking_Type"]
+        </td>
+        </tr>
+        <tr>
+        <th>
+            Booking Details
+        </th>
+        <td>
+            @ViewBag.Details
+        </td>
+        </tr>
+        <tr>
+        <th>
+            Start Date
+        </th>
+        <td>
+            @ViewBag.StartDate
+        </td>
+        </tr>
+        <tr>
+        <th>
+            End Date
+        </th>
+        <td>
+            @ViewBag.EndDate
+        </td>
+        </tr>
+        <tr>
+        <th>
+               Cost
+        </th>
+        <td>
+            @ViewBag.Cost
+        </td>
+        <tr>
+        <th>
+            User Booked
+        </th>
+        <td>
+            @ViewBag.User
+        </td>
+        </tr>
+    </table>
+    <div><button onclick="window.print()">Save as PDF</button></div>
+}
+else
+{
+<b>Either you are logged in as a Admin or you are logged out...</b>
+}

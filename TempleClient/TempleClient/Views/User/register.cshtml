@@ -1,0 +1,36 @@
+﻿@model TempleClient.Models.User
+
+@{
+    ViewData["Title"] = "register";
+}
+
+<h1>User-Registration</h1>
+
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Uname" class="form-control" placeholder="User Name"/>
+                <span asp-validation-for="Uname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Emailid" class="form-control" type="email" placeholder="Email Address"/>
+                <span asp-validation-for="Emailid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Pword" class="form-control" type="password" placeholder="Password"/>
+                <span asp-validation-for="Pword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

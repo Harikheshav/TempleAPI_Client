@@ -1,0 +1,232 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+ViewBag.uid =   @HttpContextAccessor.HttpContext.Session.GetString("UserId");
+
+}
+@if (ViewBag.uid != null)
+{
+    @model UserBook
+@if (Model != null)
+    {
+        <table class="table table-bordered table-hover">
+            <caption style="caption-side:top;font-size:40px;">Pooja</caption>
+            <thead>
+                <tr>
+                    <th>
+                        Pooja Type
+                    </th>
+                    <th>
+                        Cost
+                    </th>
+                    <th>
+                        Start Date and Time
+                    </th>
+                    <th>
+                        End Date and Time
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.PoojaBkngs)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Poo.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Poo.Cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sdt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Edt)
+                        </td>
+                            @if (item.Sdt > DateTime.Now)
+                            {
+                                <td>
+                                <a asp-action="GenerateChallan" asp-route-ch="1" asp-route-id="@item.Bkid">Generate Bank Challan</a>
+                                <a asp-action="CancelBooking" asp-route-ch="1" asp-route-id="@item.Bkid">Cancel Booking</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="alert-danger">
+                                Pooja has been completed
+                                </td>
+                            }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table class="table table-bordered table-hover">
+            <caption style="caption-side:top;font-size:40px;">Annadhanam</caption>
+            <thead>
+                <tr>
+                    <th>
+                        Booking Details
+                    </th>
+                    <th>
+                        Cost
+                    </th>
+                    <th>
+                        Start Date and Time
+                    </th>
+                    <th>
+                        End Date and Time
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.AnDhanBkngs)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Det)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sdt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Edt)
+                        </td>
+                        @if (item.Sdt > DateTime.Now)
+                            {
+                                <td>
+                                <a asp-action="GenerateChallan" asp-route-ch="2" asp-route-id="@item.Bkid">Generate Bank Challan</a>
+                                <a asp-action="CancelBooking" asp-route-ch="2" asp-route-id="@item.Bkid">Cancel Booking</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="alert-danger">
+                                Annadhanam has been completed
+                                </td>
+                            }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+        <table class="table table-bordered table-hover">
+            <caption style="caption-side:top;font-size:40px;">Concert Hall</caption>
+            <thead>
+                <tr>
+                    <th>
+                        Booking Details
+                    </th>
+                    <th>
+                        Cost
+                    </th>
+                    <th>
+                        Start Date and Time
+                    </th>
+                    <th>
+                        End Date and Time
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ConHallBkngs)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Det)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sdt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Edt)
+                        </td>
+                            @if (item.Sdt > DateTime.Now)
+                            {
+                                <td>
+                                <a asp-action="GenerateChallan" asp-route-ch="3" asp-route-id="@item.Bkid">Generate Bank Challan</a>
+                                <a asp-action="CancelBooking" asp-route-ch="3" asp-route-id="@item.Bkid">Cancel Booking</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="alert-danger">
+                                Concert has been completed
+                                </td>
+                            }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+        <table class="table table-bordered table-hover">
+            <caption style="caption-side:top;font-size:40px;">Function Hall</caption>
+            <thead>
+                <tr>
+                    <th>
+                        Booking Details
+                    </th>
+                    <th>
+                        Cost
+                    </th>
+                    <th>
+                        Start Date and Time
+                    </th>
+                    <th>
+                        End Date and Time
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.FnHallBkngs)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Det)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sdt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Edt)
+                        </td>
+
+                            @if (item.Sdt > DateTime.Now)
+                            {
+                                <td>
+                                <a asp-action="GenerateChallan" asp-route-ch="4" asp-route-id="@item.Bkid">Generate Bank Challan</a>
+                                <a asp-action="CancelBooking" asp-route-ch="4" asp-route-id="@item.Bkid">Cancel Booking</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="alert-danger">
+                                Function has been completed
+                                </td>
+                            }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+else
+{
+<b>Either you are logged in as a Admin or you are logged out...</b>
+}

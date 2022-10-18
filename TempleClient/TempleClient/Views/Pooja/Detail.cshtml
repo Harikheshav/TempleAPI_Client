@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+ViewBag.aid =    @HttpContextAccessor.HttpContext.Session.GetString("AdminId");
+
+}
+@model TempleClient.Models.Pooja
+
+@{
+    ViewData["Title"] = "Detail";
+}
+@if (ViewBag.aid != null)
+{
+<h1>Detail</h1>
+
+<div>
+    <h4>Pooja</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Pid">Edit</a> |
+    <a asp-action="Details">Back to List</a>
+</div>
+}
+else
+{
+
+<b>Either you are logged in as a User or you are logged out...</b>
+}
